@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Delivered Orders</title>
+    <style>
+      .bottom-footer {
+        position: relative;
+        bottom:0;
+        width:100%;
+        height:40px;   /* Height of the footer */
+        background:rgba(9, 78, 226, 0.226);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="../static/images/logo.png" alt="" width="43" height="24" class="d-inline-block align-text-top">
+            Service Mtaani
+        </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Log out</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="/">Log In</a>
+              </li>
+              {% endif %}
+            </ul>
+            <!-- <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+          </div>
+        </div>
+    </nav>
+    <div class="row row-cols-auto justify-content-around">
+        <div class="col-md-4">
+            <div class="text-center text-white p-3 mb-3">
+                <a href="/vendor/" class="btn btn-outline-secondary text-dark" role="button">Orders</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center text-white p-3 mb-3">
+                <a href="#" class="btn btn-outline-secondary bg-secondary text-light" role="button">Delivered Orders</a>
+                <!-- <button type="button" class="btn btn-outline-secondary bg-secondary text-light">Delivered Orders</button> -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center text-white p-3 mb-3">
+                <a href="/vendor/catalogue" class="btn btn-outline-secondary text-dark" role="button">Catalogue</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+    <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+        <h3>Delivered orders</h3>
+    </div>
+    </div>
+    <div class="container mb-5">
+    <div class="accordion" id="accordionExample">
+    {% for order in orders %}
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{ loop.index }}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+            Delivered Order #{{ loop.index }} - {{ order.part_name }}
+          </button>
+        </h2>
+        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>Order Information</strong><br>
+            <strong>Client First Name:</strong> {{ order.client_name }}<br>
+            <strong>Client Phone Number:</strong> {{ order.client_phone_number }} <br>
+            <strong>Part Name:</strong> {{ order.part_name }} <br>
+            <strong>Part Description:</strong> {{ order.part_description }}<br>
+            <strong>Part Price:</strong> {{ order.part_price }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    </div>
+
+    <footer class="bg-dark text-light py-2 fixed-bottom bottom-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <h5><a href="#about-us" class="text-light text-decoration-none">About Us</a></h5>
+          </div>
+          <div class="col-sm-4">
+            <h5><a href="#contact-us" class="text-light text-decoration-none">Contact Us</a></h5>
+          </div>
+          <div class="col-sm-4">
+            <h5><a href="#team" class="text-light text-decoration-none">Team</a></h5>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col text-center">
+            <p class="m-0">© 2023 Service Mtaani.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+   
+  </body>
+</html>

@@ -1,0 +1,24 @@
+
+/* remove accordion border */
+.accordionBtn:focus,
+.accordionBtn {
+    outline: none ;
+    box-shadow: none;
+    /* text-decoration: none !important; */
+
+  }
+/* accordion job delete button */
+.btn-delete {
+outline: none !important;
+box-shadow: none !important;
+/* background: none; */
+}
+
+.footer a {
+  color: #21252f;
+  text-decoration: none;
+}
+ 
+.footer a:hover {
+  color: #fff;
+}

@@ -1,0 +1,134 @@
+body {
+    background-color: #f9f9fa
+    /* background-color:#cdcdcd; */
+}
+
+/* Hide the vertical scroll bar */
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-track,
+body::-webkit-scrollbar-thumb{
+    width: 0.5em;
+    background-color: transparent;
+    background-color: transparent;
+}
+
+body p {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 1px;
+}
+body h1, h2, h3, h4, h5, h6 {
+    font-family: "raleway", sans-serif;
+    letter-spacing: 1.5px;
+}
+.align-center-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.carousel-caption.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+/* Mechanic Job Tiles */
+.job-tiles {
+    height: 100%; /*tiles to stretch to march the largest in height*/
+}
+.job-tiles h2 {
+    background-color:#f8f8f8;
+    font-size: 2vw;
+    padding: 2px;
+    width: 100%;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.job-tiles p {
+    width: 100%;
+    letter-spacing: 1px;
+    text-align: justify;
+    margin: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-weight: 500;
+
+}
+.job-tiles:hover{
+    background-color: #cdcdcd;
+}
+.job-tiles:hover h2{
+    background-color: #21252f;
+    color: #ffffff;
+}
+
+.job-tiles button{
+    color: #212226;
+    border: 1px solid #212226;
+}
+
+.job-tiles button:hover{
+    color: #ffffff;
+    background-color: rgb(83, 83, 81);
+    border: 1px solid rgb(83, 83, 81);
+}
+
+.job-tiles,
+.job-tiles h2,
+.job-tiles p,
+.job-tiles button {
+    transition: all 700ms linear;
+    -webkit-transition: all 700ms linear;
+    -moz-transition: all 700ms linear;
+    -ms-transition: all 700ms linear;
+    -o-transition: all 700ms linear;
+}
+
+.owl-carousel .item{
+    margin: 3px;
+}
+.owl-carousel .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.owl-carousel .item {
+    margin: 3px;
+}
+
+.owl-carousel{
+    margin-bottom:15px;
+}
+.stretch-card>.card {
+    width: 100%;
+    min-width: 100%
+}
+
+.flex {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+    .padding {
+        padding: 1.5rem
+    }
+}
+
+@media (max-width:767.98px) {
+    .padding {
+        padding: 1rem
+    }
+}
+
+.padding {
+    padding: 3rem
+}

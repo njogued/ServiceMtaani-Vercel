@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Vendor Home</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="https://github.com/GKiarie/ServiceMtaani/blob/main/static/images/logo.png?raw=true" alt="" width="43" height="24" class="d-inline-block align-text-top">
+            Service Mtaani
+        </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+            <!-- <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+          </div>
+        </div>
+    </nav>
+    <div class="row row-cols-auto justify-content-around">
+        <div class="col-md-4">
+            <div class="text-center text-white p-3 mb-3">
+                <button type="button" class="btn btn-outline-secondary bg-secondary text-light">Orders</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center text-white p-3 mb-3">
+                <button type="button" class="btn btn-outline-secondary">Delivered Orders</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center text-white p-3 mb-3">
+                <button type="button" class="btn btn-outline-secondary">Catalogue</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+            <h3>Open orders</h3>
+        </div>
+        </div>
+        <div class="container">
+        <div class="accordion" id="accordionExample">
+        {% for item in items %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ loop.index }}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                Open Order #1
+              </button>
+            </h2>
+            <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>Order Information</strong><br>
+                Client Name: {{ item.client_name }} <br>Client Phone Number: {{ item.client_phone }} <br>Parts: {{ item.parts}} <br><br>
+                <div>
+                    <button type="button" class="btn btn-outline-success">Mark as Completed</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <br>
+        {% endfor %}
+        </div>
+        </div>
+
+    
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+   
+  </body>
+</html>

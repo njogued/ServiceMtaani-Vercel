@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+<div class="row mt-1">
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md btn-open-jobs  mr-2" href="/client/" >Open Jobs</a>
+    <a type="button" class="btn btn-primary btn-lg btn-jobs col-md btn-active-jobs mr-2" href="/client/activejobs">Active Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md  btn-completed-jobs mr-2" href="/client/completedjobs">Completed Jobs</a>
+    <button type="button" id="openModalBtn" data-toggle="modal" data-target="#createJobModal" class="btn btn-secondary btn-lg btn-request-service btn-jobs col-md  mr-2">Request a Service</button>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md btn-my-orders" href="/client/myorders">My Orders</a>
+</div>
+
+
+<!-- Create Job Modal-->
+<div class="modal" id="createJobModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5>Job Details</h5>
+                <form id="myForm">
+                    <div class="form-group">
+                        <label for="job_title">Job Title</label>
+                        <input type="text" class="form-control" id="job_title" placeholder="Enter job title">
+                    </div>
+                    <div class="form-group">
+                        <label for="job_desc">Job Description</label>
+                        <input type="text" class="form-control" id="job_desc" placeholder="Enter job description">
+                    </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="submitBtn" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Create Job Modal -->
+
+<!-- Jobs tiles section -->
+<div class="accordion" id="accordionExample">
+    <h3 id="jobs-heading">Active Jobs</h3>
+    {% for job in jobs.values() %}
+    {% set card_index = loop.index %}
+
+    <div class="card my-2 shadow-sm">
+        <div class="card-header" id="heading{{card_index}}">
+            <h2 class="mb-0">
+                <button class="btn btn-block text-left accordionBtn d-flex align-items-center justify-content-between" type="button" data-toggle="collapse" data-target="#collapse{{card_index}}" aria-expanded="true" aria-controls="collapse{{card_index}}">
+                    <p>Job #{{loop.index}} - {{job[0].job_title}}</p>
+                    <i class="fa-solid fa-chevron-down fa-shake fa-lg"></i>
+                </button>
+            </h2>
+        </div>
+
+        {% for bid in job %}
+        <div id="collapse{{card_index}}" class="collapse" aria-labelledby="heading{{card_index}}" data-parent="#accordionExample">
+            <div class="card-body">
+
+                {% if bid.mechanic_name %}
+                <strong>Bid Information {{loop.index}}</strong><br>
+                <p>Mechanic Name: {{ bid.mechanic_name }}</p>
+                {% else %}
+                <p>No Bid Yet</p>
+                {% endif %}
+                {% if bid.mechanic_phone %}
+                <p>Mechanic Phone: {{ bid.mechanic_phone }}</p>
+                {% endif %}
+                {% if bid.mechanic_rating %}
+                <p>Mechanic Ratings: {{bid.mechanic_rating}}</p>
+                {% endif %}
+                {% if bid.bid_amount %}
+                <p>Bid Amount: {{ bid.bid_amount }}</p>
+                <button class="btn btn-success openReviewModalBtn"  type="button" data-id="{{ bid.bid_id }}" id="openReviewModalBtn" data-toggle="modal" data-target="#reviewJobModal">Mark as Completed</button>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% endfor %}
+</div>
+<!-- end of tiles section -->
+
+<!-- Review Mechanic Modal -->
+<div class="modal" id="reviewJobModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5>Review the mechanic</h5>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="ratingValue">Pick rating</label>
+                        <select class="form-control" name="ratingValue" id="ratingValue">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+                    <div class="form-group">
+                        <label for="job_desc">Enter review</label>
+                        <input type="text" class="form-control" id="reviewText" name="review" placeholder="Review">
+                    </div>
+                    <input type="hidden" id="bid_id" name="bid_id" class="form-control">
+                    <br><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="reviewMechBtn" type="submit" class="submitReviewBtn btn btn-primary">Submit and Close Job</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of review mechanic modal -->
+</div>
+
+
+
+{% endblock content%}

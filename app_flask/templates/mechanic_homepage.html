@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <div class="row mt-1">
+    <a type="button" class="btn btn-primary btn-lg col-md accordionBtn mr-2  mech-jobs mech-open-jobs" href="/mechanic/">Open Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg col-md accordionBtn mr-2  mech-jobs mech-open-bids" href="/mechanic/openbids">Open Bids</a>
+    <a type="button" class="btn btn-secondary btn-lg col-md accordionBtn mr-2  mech-jobs mech-active-jobs" href="/mechanic/activejobs">Active Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg col-md accordionBtn  mech-jobs mech-completed-jobs" href="/mechanic/completedjobs">Completed Jobs</a>
+  </div>
+
+  <!-- Example row of columns -->
+  <div class="row">
+    {% for job in all_jobs %}
+    <div class="col-md-4 my-2">
+      <div class="card job-tiles d-flex flex-column shadow">
+        <h2>{{ job.job_title }}</h2>
+        <p>{{ job.job_description }}</p>
+        <div class="mt-auto text-right p-2">
+          <button type="button" class="bidForJob  btn btn-outline-success" data-id="{{ job.id }}" data-toggle="modal" data-target="#bidModal">Bid For Job</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Place Bid Modal  -->
+  <div class="modal fade" id="bidModal" tabindex="-1" aria-labelledby="bidModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bidModalLabel">Place Bid</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" id="form1">
+            <div class="form-group">
+              <label for="formprice">Enter Bid Amount</label>
+              <input required type="number" class="form-control" name="bid_amount" id="formprice" placeholder="Amount in Ksh. eg. 5000">
+              <input type="hidden" name="mechanic_id" value="{{ current_user.id }}">
+              <input type="hidden" id="job_id" name="job_id" class="form-control">
+
+            </div>
+            <br><button type="submit" class="submitbutton btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endblock content %}

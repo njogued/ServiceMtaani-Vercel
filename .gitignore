@@ -1,0 +1,2 @@
+*.pyc
+api/v1/views/__pycache__/

@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+<!-- {% block title %}My Child Page{% endblock %} -->
+{% block content %}
+<div class="container">
+  <div class="row mt-1" >
+    <a type="button" class="btn btn-primary btn-lg btn-jobs col-md  mr-2 btn-open-jobs  " href="/client/" >Open Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md  mr-2 btn-active-jobs " href="/client/activejobs">Active Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md  mr-2  btn-completed-jobs " href="/client/completedjobs">Completed Jobs</a>
+    <button type="button" id="openModalBtn" data-toggle="modal" data-target="#createJobModal" class="btn btn-secondary btn-lg btn-request-service btn-jobs col-md  mr-2  ">Request a Service</button>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md btn-my-orders" href="/client/myorders">My Orders</a>
+  </div>
+  <!-- Create Job Modal-->
+  <div class="modal" id="createJobModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5>Job Details</h5>
+          <form id="myForm">
+            <div class="form-group">
+              <label for="job_title">Job Title</label>
+              <input type="text" class="form-control" maxlength="20" id="job_title" placeholder="Enter job title">
+            </div>
+            <div class="form-group">
+              <label for="job_desc">Job Description</label>
+              <input type="text" class="form-control " maxlength="120" id="job_desc" placeholder="Enter job description">
+            </div>
+          </form>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="submitBtn" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Create Job Modal -->
+
+
+  <!-- Jobs Tiles Section -->
+  <div class="accordion" id="accordionExample">
+    <h1 id="jobs-heading">Open Jobs</h1>
+
+    {% for job in jobs.values() %}
+    {% set card_index = loop.index %}
+    <div class="card my-2 shadow-sm">
+      <div class="card-header row d-flex justify-content-between" id="heading{{card_index}}">
+        <h2 class="mb-0 col-md-9">
+          <button class="btn btn-block text-left accordionBtn d-flex align-items-center justify-content-between"  type="button" data-toggle="collapse" data-target="#collapse{{card_index}}" aria-expanded="true" aria-controls="collapse{{card_index}}">
+            <p>Job #{{loop.index}} - {{job[0].job_title}} </p>
+            <i class="fa-solid fa-chevron-down fa-shake fa-lg"></i>
+          </button>
+        </h2>
+        <div class="col-md-3 d-flex align-items-center justify-content-end">
+          <button type="button" class="btn-outline-danger rounded btn-delete" data-job-id="{{job[0].job_id}}">
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+        </div>
+
+      </div>
+
+      {% for bid in job %}
+      <div id="collapse{{card_index}}" class="collapse" aria-labelledby="heading{{card_index}}" data-parent="#accordionExample">
+        <div class="card-body">
+
+          {% if bid.mechanic_name %}
+          <strong>Bid Information {{loop.index}}</strong>
+          <p>Mechanic Name: {{ bid.mechanic_name }}</p>
+          {% else %}
+          <p>No Bid Yet</p>
+          {% endif %}
+          {% if bid.mechanic_phone %}
+          <p>Mechanic Phone: {{ bid.mechanic_phone }}</p>
+          {% endif %}
+          {% if bid.mechanic_rating %}
+          <p>Mechanic Ratings: {{bid.mechanic_rating}}</p>
+          {% endif %}
+          {% if bid.bid_amount %}
+          <p>Bid Amount: {{ bid.bid_amount }}</p>
+          <button class="btn btn-success accept_bid"  type="button" data-bid-id="{{ bid.bid_id }}" id="accept_bid">Accept Bid</button>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Jobs Section -->
+</div>
+{% endblock content %}

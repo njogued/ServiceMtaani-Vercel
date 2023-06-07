@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+<!-- {% block title %}My Child Page{% endblock %} -->
+{% block content %}
+<div class="container">
+  <div class="row mt-1">
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md btn-open-jobs  mr-2" href="/client/" >Open Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md btn-active-jobs mr-2" href="/client/activejobs">Active Jobs</a>
+    <a type="button" class="btn btn-secondary btn-lg btn-jobs col-md  btn-completed-jobs mr-2" href="/client/completedjobs">Completed Jobs</a>
+    <button type="button" id="openModalBtn" data-toggle="modal" data-target="#createJobModal" class="btn btn-secondary btn-lg btn-request-service btn-jobs col-md  mr-2">Request a Service</button>
+    <a type="button" class="btn btn-primary btn-lg btn-jobs col-md btn-my-orders" href="/client/myorders">My Orders</a>
+  </div>
+
+
+  <!-- Start of Accordion orders -->
+  <div class="accordion" id="accordionExample">
+    <h1 id="jobs-heading">Parts Ordered</h1>
+    {% for part in orders %}
+    <div class="card my-2 shadow-sm">
+      <div class="card-header row d-flex justify-content-between" id="headingOne">
+        <h2 class="mb-0 col-md-9" >
+          <button class="btn btn-block text-left accordionBtn d-flex align-items-center justify-content-between"  type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <p>Part #{{ loop.index }} - {{ part.order_part_name }}</p>
+            <i class="fa-solid fa-chevron-down fa-shake fa-lg"></i>
+          </button>
+        </h2>
+        <!-- <div class="col-md-3 d-flex align-items-center justify-content-end">
+          <button type="button" class="btn-outline-danger rounded btn-delete" data-ordered-part-id="{{part.order_part_id}}">
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+        </div> -->
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <strong>Part Information</strong><br>
+          <p>Ordered Part Name: {{ part.order_part_name }}</p>
+          <p>Ordered Part Description: {{ part.order_part_description }}</p>
+          <p>Vendor Name: {{part.vendor_name}}</p>
+          <p>Vendor Phone Number: {{part.vendor_phone_number}}</p>
+          <p>Part Price: {{ part.part_price }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- End of Accordion orders -->
+</div>
+
+{% endblock content %}

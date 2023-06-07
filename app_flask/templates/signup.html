@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<form method="POST">
+    <h3 text-align="center">Sign Up</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+        />
+        <label for="first_name">First Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="first_name"
+            name="first_name"
+            placeholder="Enter first name"
+        />
+        <label for="last_name">Last Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="last_name"
+            name="last_name"
+            placeholder="Enter last name"
+        />
+        <label for="phonenumber">Phone Number</label>
+        <input
+            type="text"
+            class="form-control"
+            id="phone_number"
+            name="phone_number"
+            placeholder="Enter phone number (start with 254)"
+        />
+        <label for="business_name">Business Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="business_name"
+            name="business_name"
+            placeholder="Enter business (optional)"
+        />
+        <label for="password">Password</label>
+        <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+        />
+        <label for="password2">Confirm Password</label>
+        <input
+            type="password"
+            class="form-control"
+            id="password2"
+            name="password2"
+            placeholder="Confirm password"
+        />
+    </div>
+    <br />
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
